@@ -16,5 +16,9 @@ namespace Big_Bang_assesment.Models
         public ICollection<Room>? Rooms { get; set; }
         public ICollection<Guest>? Guests { get; set;}
 
+        internal object? PostHotel(Hotel hotel)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

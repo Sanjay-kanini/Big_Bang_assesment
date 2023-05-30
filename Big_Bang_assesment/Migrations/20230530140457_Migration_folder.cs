@@ -112,6 +112,11 @@ namespace Big_Bang_assesment.Migrations
                 name: "IX_Rooms_Hotel_id",
                 table: "Rooms",
                 column: "Hotel_id");
+            migrationBuilder.AddColumn<string>(
+                name: "Room_Avaliability",
+                table: "Rooms"
+              
+);
         }
 
         /// <inheritdoc />

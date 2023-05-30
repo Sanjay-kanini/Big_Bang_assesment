@@ -89,3 +89,4 @@ F:\c#\Big_Bang_assesment\Big_Bang_assesment\obj\Debug\net6.0\refint\Big_Bang_ass
 F:\c#\Big_Bang_assesment\Big_Bang_assesment\obj\Debug\net6.0\Big_Bang_assesment.pdb
 F:\c#\Big_Bang_assesment\Big_Bang_assesment\obj\Debug\net6.0\Big_Bang_assesment.genruntimeconfig.cache
 F:\c#\Big_Bang_assesment\Big_Bang_assesment\obj\Debug\net6.0\ref\Big_Bang_assesment.dll
+F:\c#\Big_Bang_assesment\Big_Bang_assesment\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
