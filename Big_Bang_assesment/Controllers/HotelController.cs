@@ -4,28 +4,27 @@ using Big_Bang_assesment.Repository;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System;
 
-namespace APIcodefirst.Controllers
+
+namespace Big_Bang_assesment.Controllers
 {
-    //[Authorize]
+    [Authorize(Roles ="Guest")]
     [Route("api/[controller]")]
     [ApiController]
     public class HotelController : ControllerBase
     {
-        private readonly IHotel hr;
+        private readonly IHotel ih;
 
-        public HotelController(IHotel hr)
+        public HotelController(IHotel ih)
         {
-            this.hr = hr;
+            this.ih= ih;
         }
-
         [HttpGet]
         public ActionResult<IEnumerable<Hotel>> GetHotel()
         {
             try
             {
-                return Ok(hr.GetHotel());
+                return Ok(ih.GetHotel());
             }
             catch (Exception ex)
             {
@@ -39,7 +38,7 @@ namespace APIcodefirst.Controllers
         {
             try
             {
-                var hotel = hr.GetHotelByid(id);
+                var hotel = ih.GetHotelByid(id);
                 if (hotel == null)
                 {
                     return NotFound();
@@ -58,7 +57,7 @@ namespace APIcodefirst.Controllers
         {
             try
             {
-                return Ok(hr.PostHotel(hotel));
+                return Ok(ih.PostHotel(hotel));
             }
             catch (Exception ex)
             {
@@ -68,11 +67,11 @@ namespace APIcodefirst.Controllers
         }
 
         [HttpPut("{id}")]
-        public IActionResult Put(int id, Hotel hotel)
+        public IActionResult Put(Hotel hotel)
         {
             try
             {
-                hr.PutHotel(hotel);
+                ih.PutHotel(hotel);
                 return NoContent();
             }
             catch (Exception ex)
@@ -87,7 +86,7 @@ namespace APIcodefirst.Controllers
         {
             try
             {
-                hr.DeleteHotel(id);
+                ih.DeleteHotel(id);
                 return NoContent();
             }
             catch (Exception ex)
@@ -102,7 +101,7 @@ namespace APIcodefirst.Controllers
         {
             try
             {
-                return Ok(hr.GetLocation(location));
+                return Ok(ih.GetLocation(location));
             }
             catch (Exception ex)
             {
@@ -110,48 +109,6 @@ namespace APIcodefirst.Controllers
                 return BadRequest(ex.Message);
             }
         }
-        /*
-        [HttpGet("/filter/price")]
-        public ActionResult<IEnumerable<Hotels>> GetPrice(int price)
-        {
-            try
-            {
-                return Ok(hr.GetPrice(price));
-            }
-            catch (Exception ex)
-            {
-
-                return BadRequest(ex.Message);
-            }
-        }
-
-        [HttpGet("/filter/amenities")]
-        public ActionResult<IEnumerable<Hotels>> GetAmenities(string amenities)
-        {
-            try
-            {
-                return Ok(hr.GetAmenities(amenities));
-            }
-            catch (Exception ex)
-            {
-
-                return BadRequest(ex.Message);
-            }
-        }
-        */
-        /*[HttpGet("/count/rooms")]
-        public ActionResult<int> GetRoomAvailabilityCount(string hotelname)
-        {
-            try
-            {
-                int availablerooms = hr.GetRoomAvailabilityCount(hotelname);
-                return Ok(availablerooms);
-            }
-            catch (Exception ex)
-            {
-
-                return BadRequest(ex.Message);
-            }
-        }*/
+       
     }
 }

@@ -1,9 +1,8 @@
 ﻿using Big_Bang_assesment.DB;
 using Big_Bang_assesment.Models;
-using Big_Bang_assesment.Repository;
 using Microsoft.EntityFrameworkCore;
 
-namespace APIcodefirst.Repository
+namespace Big_Bang_assesment.Repository
 {
     public class HotelRepository : IHotel
     {
@@ -48,7 +47,8 @@ namespace APIcodefirst.Repository
             return Context.Hotels.Where(e => e.Hotel_Location == location).ToList();
         }
 
-   
+
+      
 
         /*public int GetRoomAvailabilityCount(string hotelname)
         {

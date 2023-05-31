@@ -120,6 +120,9 @@ namespace Big_Bang_assesment.Migrations
                     b.Property<int>("Room_Price")
                         .HasColumnType("int");
 
+                    b.Property<int>("Room_availability")
+                        .HasColumnType("int");
+
                     b.Property<string>("Room_type")
                         .HasColumnType("nvarchar(max)");
 

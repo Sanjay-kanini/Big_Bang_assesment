@@ -1,8 +1,9 @@
 ﻿
 using Big_Bang_assesment.DB;
 using Big_Bang_assesment.Models;
+using Big_Bang_assesment.Repository;
 
-namespace APIcodefirst.Repository
+namespace Big_Bang_assesment.Repository
 {
     public class RoomRepository : IRoom
     {
@@ -38,5 +39,14 @@ namespace APIcodefirst.Repository
             Context.Rooms.Remove(e);
             Context.SaveChanges();
         }
+        public IEnumerable<Room> GetAmenities(string amenities)
+        {
+            return Context.Rooms.Where(e => e.Room_Amenities == amenities).ToList();
+        }
+        public IEnumerable<Room> GetPrice(int price)
+        {
+            return Context.Rooms.Where(e => e.Room_Price == price).ToList();
+        }
+
     }
 }

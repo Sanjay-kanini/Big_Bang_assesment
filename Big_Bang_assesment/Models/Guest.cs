@@ -10,6 +10,6 @@ namespace Big_Bang_assesment.Models
         public string? Guest_email { get; set; }
         public string? Guest_pwd { get; set; }  
 
-        public ICollection<Reservation> Reservations { get; set; }  
+        public ICollection<Reservation>? Reservations { get; set; }  
     }
 }

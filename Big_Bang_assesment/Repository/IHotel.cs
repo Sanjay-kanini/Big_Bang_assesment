@@ -12,11 +12,7 @@ namespace Big_Bang_assesment.Repository
 
         public void DeleteHotel(int id);
 
-       // int GetRoomAvailabilityCount(string hotelname);
-
         IEnumerable<Hotel> GetLocation(string location);
-
-        //IEnumerable<Hotel> GetPrice(int price);
 
        
     }

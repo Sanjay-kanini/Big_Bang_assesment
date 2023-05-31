@@ -1,7 +1,8 @@
 ﻿
 using Big_Bang_assesment.Models;
 
-namespace APIcodefirst.Repository
+
+namespace Big_Bang_assesment.Repository
 {
     public interface IRoom
     {
@@ -13,6 +14,15 @@ namespace APIcodefirst.Repository
         public void PutRoom(Room rooms);
 
         public void DeleteRoom(int id);
+
+        IEnumerable<Room> GetAmenities(string amenities);
+        IEnumerable<Room> GetPrice(int price);
+
+
+
+
+
+
 
     }
 }

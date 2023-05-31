@@ -1,25 +1,28 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
-using APIcodefirst.Repository;
 using Big_Bang_assesment.Models;
+using Big_Bang_assesment.Repository;
+using Microsoft.Data.SqlClient;
+using Microsoft.AspNetCore.Authorization;
 
-namespace APIcodefirst.Controllers
+namespace Big_Bang_assesment.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
+
     public class RoomsController : ControllerBase
     {
-        private readonly IRoom hr;
+        private readonly IRoom ih;
 
-        public RoomsController(IRoom hr)
+        public RoomsController(IRoom ih)
         {
-            this.hr = hr;
+            this.ih = ih;
         }
 
         [HttpGet]
@@ -27,7 +30,7 @@ namespace APIcodefirst.Controllers
         {
             try
             {
-                return Ok(hr.GetRoom());
+                return Ok(ih.GetRoom());
             }
             catch (Exception ex)
             {
@@ -41,7 +44,7 @@ namespace APIcodefirst.Controllers
         {
             try
             {
-                var rooms = hr.GetRoomByid(id);
+                var rooms = ih.GetRoomByid(id);
                 if (rooms == null)
                 {
                     return NotFound();
@@ -60,7 +63,7 @@ namespace APIcodefirst.Controllers
         {
             try
             {
-                return Ok(hr.PostRoom(room));
+                return Ok(ih.PostRoom(room));
             }
             catch (Exception ex)
             {
@@ -74,7 +77,7 @@ namespace APIcodefirst.Controllers
         {
             try
             {
-                hr.PutRoom(room);
+                ih.PutRoom(room);
                 return NoContent();
             }
             catch (Exception ex)
@@ -89,7 +92,7 @@ namespace APIcodefirst.Controllers
         {
             try
             {
-                hr.DeleteRoom(id);
+                ih.DeleteRoom(id);
                 return NoContent();
             }
             catch (Exception ex)
@@ -97,6 +100,48 @@ namespace APIcodefirst.Controllers
 
                 return BadRequest(ex.Message);
             }
+        }
+        [HttpGet("/filter/amenities")]
+        public ActionResult<IEnumerable<Room>> GetAmenities(string amenities)
+        {
+            try
+            {
+                return Ok(ih.GetAmenities(amenities));
+            }
+            catch (Exception)
+            {
+
+                return StatusCode(StatusCodes.Status500InternalServerError, "An error occurred while filtering by amenities.");
+            }
+        }
+        [HttpGet("/filter/price")]
+        public ActionResult<IEnumerable<Room>> GetPrice(int price)
+        {
+            try
+            {
+                return Ok(ih.GetPrice(price));
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "An error occurred while filtering by price.");
+            }
+        }
+        [HttpGet("/count/room")]
+        // [Route("countarticle/{id}")]
+
+        public int  GetCount(string room_type)
+        {
+            //int count = 0;
+            SqlConnection con = new SqlConnection("Data Source = DESKTOP-GPOQ94V\\SQLEXPRESS; database = Hotels;integrated security = true; trustservercertificate = true;");
+            SqlCommand cmd = new SqlCommand("sp_Count", con);
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            con.Open();
+            cmd.Parameters.AddWithValue("@Room", room_type);
+
+            int count =(int)cmd.ExecuteScalar();
+
+            return count;
+            con.Close();
         }
     }
 }
